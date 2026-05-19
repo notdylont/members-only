@@ -14,12 +14,12 @@ const verifyCallback = async (username, password, done) => {
 
     if (!user) return done(null, false);
 
-    const isValid = bcrypt.compare(password, user.password);
+    const isValid = await bcrypt.compare(password, user.password);
 
     if (isValid) {
       return done(null, user);
     } else {
-      return done(null.false);
+      return done(null, false);
     }
   } catch (err) {
     done(err);

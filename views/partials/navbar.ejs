@@ -1,6 +1,7 @@
 <nav>
     <a href="/">Home</a>
     <% if(locals.user) { %>
+        <a href="/new-msg">Create a new message</a>
         <% if (locals.user && !locals.user.is_member) {%>
             <a href="/membership">Become a member</a>
         <% } %>

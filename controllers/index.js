@@ -10,8 +10,9 @@ const logout = (req, res, next) => {
   });
 };
 
-const getIndex = (req, res) => {
-  res.render('index', { user: req.user });
+const getIndex = async (req, res) => {
+  const messages = await db.getAllMessages();
+  res.render('index', { user: req.user, messages: messages });
 };
 
 const getSignUpForm = (req, res) => {
@@ -24,6 +25,20 @@ const getLoginForm = (req, res) => {
 
 const getMemberForm = (req, res) => {
   res.render('member-form', { user: req.user });
+};
+
+const getNewMsgForm = (req, res) => {
+  res.render('new-msg-form', { user: req.user });
+};
+
+const postNewMsgForm = async (req, res, next) => {
+  try {
+    const { title, message } = req.body;
+    await db.insertMessage(title, message, req.user.id);
+    return res.redirect('/');
+  } catch (err) {
+    next(err);
+  }
 };
 
 const postMemberForm = async (req, res, next) => {
@@ -75,7 +90,9 @@ module.exports = {
   getSignUpForm,
   getLoginForm,
   getMemberForm,
+  getNewMsgForm,
   postMemberForm,
   postSignUpForm,
   postLoginForm,
+  postNewMsgForm,
 };

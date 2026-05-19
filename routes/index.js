@@ -8,10 +8,12 @@ router.get('/', controller.getIndex);
 router.get('/sign-up', controller.getSignUpForm);
 router.get('/login', controller.getLoginForm);
 router.get('/membership', isLoggedIn, controller.getMemberForm);
+router.get('/logout', controller.logout);
+router.get('/new-msg', controller.getNewMsgForm);
 
 router.post('/membership', isLoggedIn, controller.postMemberForm);
 router.post('/login', controller.postLoginForm);
-router.get('/logout', controller.logout);
+router.post('/new-msg', controller.postNewMsgForm);
 router.post(
   '/sign-up',
   // validate sign up
