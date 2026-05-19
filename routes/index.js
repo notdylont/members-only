@@ -11,6 +11,7 @@ router.get('/membership', isLoggedIn, controller.getMemberForm);
 
 router.post('/membership', isLoggedIn, controller.postMemberForm);
 router.post('/login', controller.postLoginForm);
+router.get('/logout', controller.logout);
 router.post(
   '/sign-up',
   // validate sign up

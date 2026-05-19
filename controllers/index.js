@@ -3,8 +3,15 @@ const db = require('../db/queries');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
+const logout = (req, res, next) => {
+  req.logout((err) => {
+    if (err) return next(err);
+    res.redirect('/');
+  });
+};
+
 const getIndex = (req, res) => {
-  res.render('index');
+  res.render('index', { user: req.user });
 };
 
 const getSignUpForm = (req, res) => {
@@ -16,10 +23,7 @@ const getLoginForm = (req, res) => {
 };
 
 const getMemberForm = (req, res) => {
-  if (!req.user) {
-    return res.redirect('/');
-  }
-  res.render('member-form');
+  res.render('member-form', { user: req.user });
 };
 
 const postMemberForm = async (req, res, next) => {
@@ -29,7 +33,9 @@ const postMemberForm = async (req, res, next) => {
       await db.addMembership(req.user.id);
       res.redirect('/');
     } else {
-      res.status(401).render('member-form', { error: 'Wrong password' });
+      res
+        .status(401)
+        .render('member-form', { error: 'Wrong password', user: req.user });
     }
   } catch (err) {
     next(err);
@@ -64,6 +70,7 @@ const postLoginForm = (req, res, next) => {
 };
 
 module.exports = {
+  logout,
   getIndex,
   getSignUpForm,
   getLoginForm,

@@ -1,7 +1,9 @@
 <nav>
     <a href="/">Home</a>
     <% if(locals.user) { %>
-        <a href="/membship">Become a member</a>
+        <% if (locals.user && !locals.user.is_member) {%>
+            <a href="/membership">Become a member</a>
+        <% } %>
         <a href="/logout">Logout</a>
     <% } else{ %>
         <a href="/login">Login</a>
