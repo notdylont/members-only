@@ -6,6 +6,8 @@
     <title>Login</title>
   </head>
   <body>
+    <%- include('./partials/navbar.ejs') %>
+    <p>Don't have an account? <a href="/sign-up">Sign up</a></p>
     <form action="/login" method="POST">
       <label for="username">Username:</label>
       <input type="text" name="username" id="username" />

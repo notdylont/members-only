@@ -15,10 +15,6 @@ const getLoginForm = (req, res) => {
   res.render('login-form');
 };
 
-const getLoginFailure = (req, res) => {
-  res.render('login-failure');
-};
-
 const getMemberForm = (req, res) => {
   if (!req.user) {
     return res.redirect('/');
