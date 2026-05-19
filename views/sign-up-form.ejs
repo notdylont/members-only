@@ -6,17 +6,24 @@
     <title>Sign Up</title>
   </head>
   <body>
+    <% if (locals.errors) { %>
+      <ul>
+        <% errors.forEach(error => { %>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
     <form action="/sign-up" method="POST">
       <label for="first_name">First Name:</label>
-      <input type="text" name="first_name" id="first_name" required />
+      <input type="text" name="first_name" id="first_name" value="<%= locals.first_name || '' %>" required />
       <label for="last_name">Last Name:</label>
-      <input type="text" name="last_name" id="last_name" required />
+      <input type="text" name="last_name" id="last_name" value="<%= locals.last_name || '' %>" required />
       <label for="username">Username:</label>
-      <input type="text" name="username" id="username" required />
+      <input type="text" name="username" id="username" value="<%= locals.username || '' %>"  required />
       <label for="pass">Password:</label>
       <input type="password" name="password" id="password" required />
       <label for="confirm_password">Confirm Password:</label>
-      <input type="password" name="confirm_password" id="confirm_password" />
+      <input type="password" name="confirm_password" id="confirm_password" required/>
       <button type="submit">Sign up</button>
     </form>
   </body>

@@ -1,8 +1,29 @@
 const { Router } = require('express');
 const controller = require('../controllers/index');
 const router = Router();
+const { body, validationResult } = require('express-validator');
 
 router.get('/', controller.getIndex);
 router.get('/sign-up', controller.getSignUpForm);
+router.get('/login', controller.getLoginForm);
+router.post(
+  '/sign-up',
+  // validate sign up
+  [
+    body('first_name').trim().notEmpty().withMessage('First name is required'),
+    body('last_name').trim().notEmpty().withMessage('Last name is required'),
+    body('username').trim().notEmpty().withMessage('Username is required'),
+    body('password')
+      .isLength({ min: 6 })
+      .withMessage('Password must be at least 6 characters'),
+    body('confirm_password').custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('Passwords must match');
+      }
+      return true;
+    }),
+  ],
+  controller.postSignUpForm,
+);
 
 module.exports = router;
