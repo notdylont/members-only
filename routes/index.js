@@ -2,11 +2,14 @@ const { Router } = require('express');
 const controller = require('../controllers/index');
 const router = Router();
 const { body, validationResult } = require('express-validator');
+const isLoggedIn = require('../middleware/isLoggedIn');
 
 router.get('/', controller.getIndex);
 router.get('/sign-up', controller.getSignUpForm);
 router.get('/login', controller.getLoginForm);
+router.get('/membership', isLoggedIn, controller.getMemberForm);
 
+router.post('/membership', isLoggedIn, controller.postMemberForm);
 router.post('/login', controller.postLoginForm);
 router.post(
   '/sign-up',

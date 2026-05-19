@@ -19,6 +19,27 @@ const getLoginFailure = (req, res) => {
   res.render('login-failure');
 };
 
+const getMemberForm = (req, res) => {
+  if (!req.user) {
+    return res.redirect('/');
+  }
+  res.render('member-form');
+};
+
+const postMemberForm = async (req, res, next) => {
+  try {
+    const { member_password } = req.body;
+    if (member_password === process.env.MEMBER_KEY) {
+      await db.addMembership(req.user.id);
+      res.redirect('/');
+    } else {
+      res.status(401).render('member-form', { error: 'Wrong password' });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const postSignUpForm = async (req, res, next) => {
   try {
     const { first_name, last_name, username, password } = req.body;
@@ -50,6 +71,8 @@ module.exports = {
   getIndex,
   getSignUpForm,
   getLoginForm,
+  getMemberForm,
+  postMemberForm,
   postSignUpForm,
   postLoginForm,
 };

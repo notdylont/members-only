@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Become a member</title>
+  </head>
+  <body>
+    <% if (locals.error) {%>
+      <p><%= locals.error %></p>
+    <% } %>
+    <h3>Become a member to get some sick benefits.</h3>
+    <form action="/membership" method="POST">
+      <label for="member_password">Enter the password...</label>
+      <input type="password" name="member_password" id="member_password" />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

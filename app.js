@@ -1,3 +1,6 @@
+require('./middleware/passport');
+require('dotenv').config();
+
 const path = require('node:path');
 const express = require('express');
 const router = require('./routes/index');
@@ -6,9 +9,6 @@ const expressSession = require('express-session');
 const pgSession = require('connect-pg-simple')(expressSession);
 const pool = require('./db/pool');
 const passport = require('passport');
-
-require('./config/passport');
-require('dotenv').config();
 
 const app = express();
 const assetsPath = path.join(__dirname, 'public');
