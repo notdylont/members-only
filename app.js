@@ -15,8 +15,8 @@ const assetsPath = path.join(__dirname, 'public');
 const { PORT = 3000 } = process.env;
 
 app.use(express.static(assetsPath));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(router);
 app.use(
   expressSession({
     store: new pgSession({
@@ -33,6 +33,8 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(router);
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const db = require('../db/queries');
 const bcrypt = require('bcrypt');
+const passport = require('passport');
 
 const getIndex = (req, res) => {
   res.render('index');
@@ -8,6 +9,14 @@ const getIndex = (req, res) => {
 
 const getSignUpForm = (req, res) => {
   res.render('sign-up-form');
+};
+
+const getLoginForm = (req, res) => {
+  res.render('login-form');
+};
+
+const getLoginFailure = (req, res) => {
+  res.render('login-failure');
 };
 
 const postSignUpForm = async (req, res, next) => {
@@ -30,13 +39,17 @@ const postSignUpForm = async (req, res, next) => {
   }
 };
 
-const getLoginForm = (req, res) => {
-  res.render('login');
+const postLoginForm = (req, res, next) => {
+  passport.authenticate('local', {
+    failureRedirect: '/login',
+    successRedirect: '/',
+  })(req, res, next);
 };
 
 module.exports = {
   getIndex,
   getSignUpForm,
-  postSignUpForm,
   getLoginForm,
+  postSignUpForm,
+  postLoginForm,
 };
