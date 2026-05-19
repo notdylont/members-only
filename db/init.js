@@ -11,7 +11,6 @@ pool
     last_name TEXT NOT NULL,
     username TEXT NOT NULL,
     password TEXT NOT NULL,
-    salt TEXT NOT NULL,
     is_member BOOLEAN DEFAULT false
     );
 
