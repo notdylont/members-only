@@ -4,16 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <%- include('./partials/navbar.ejs') %>
-    <p>Don't have an account? <a href="/sign-up">Sign up</a></p>
-    <form action="/login" method="POST">
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username" />
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" />
-      <button type="submit">Login</button>
-    </form>
+
+    <main class="form-page">
+      <h1 class="form-heading">Welcome back</h1>
+      <p class="form-subheading">Sign in to continue</p>
+
+      <form action="/login" method="POST">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" required />
+        </div>
+        <button type="submit" class="form-submit">Login</button>
+      </form>
+
+      <span class="form-link"
+        >Don't have an account? <a href="/sign-up">Sign up</a></span
+      >
+    </main>
   </body>
 </html>

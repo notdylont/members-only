@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin</title>
-  </head>
-  <body>
-    <%- include('./partials/navbar.ejs') %>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <%- include('./partials/navbar.ejs') %>
+
+  <main class="form-page">
+    <h1 class="form-heading">Admin access</h1>
+    <p class="form-subheading">Enter the admin key</p>
+
     <% if (locals.error) { %>
-      <p><%= error %></p>
+      <div class="form-error"><%= error %></div>
     <% } %>
+
     <form action="/admin" method="POST">
-      <label for="admin_key">Admin key:</label>
-      <input type="password" name="admin_key" id="admin_key" required />
-      <button>Admin sign in</button>
+      <div class="form-group">
+        <label for="admin_key">Admin key</label>
+        <input type="password" name="admin_key" id="admin_key" required />
+      </div>
+      <button type="submit" class="form-submit">Confirm</button>
     </form>
-  </body>
+  </main>
+</body>
 </html>

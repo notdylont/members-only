@@ -1,17 +1,18 @@
 <nav>
-    <a href="/">Home</a>
-    <% if(locals.user) { %>
-        <a href="/new-msg">Create a new message</a>
-        <% if (locals.user && !locals.user.is_member) {%>
-            <a href="/membership">Become a member</a>
-        <% } %>
-        <% if(locals.user && locals.user.is_member && !locals.user.is_admin) { %>
-            <a href="/admin">Become an admin</a>
-        <% } %>
-        <a href="/logout">Logout</a>
-    <% } else{ %>
-        <a href="/login">Login</a>
-        <a href="/sign-up">Sign up</a>
-
+  <a href="/" class="nav-brand">Herbarium</a>
+  <div class="nav-links">
+    <% if (locals.user) { %>
+      <a href="/new-msg">New post</a>
+      <% if (!locals.user.is_member) { %>
+        <a href="/membership">Become a member</a>
+      <% } %>
+      <% if (locals.user.is_member && !locals.user.is_admin) { %>
+        <a href="/admin">Become an admin</a>
+      <% } %>
+      <a href="/logout">Logout</a>
+    <% } else { %>
+      <a href="/login">Login</a>
+      <a href="/sign-up" class="nav-primary">Sign up</a>
     <% } %>
+  </div>
 </nav>

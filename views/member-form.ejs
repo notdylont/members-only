@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Become a member</title>
-  </head>
-  <body>
-    <%- include('./partials/navbar.ejs') %>
-    <% if (locals.error) {%>
-      <p><%= locals.error %></p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Become a member</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <%- include('./partials/navbar.ejs') %>
+
+  <main class="form-page">
+    <h1 class="form-heading">Become a member</h1>
+    <p class="form-subheading">Enter the membership key to unlock benefits like seeing authors of posts</p>
+
+    <% if (locals.error) { %>
+      <div class="form-error"><%= error %></div>
     <% } %>
-    <h3>Become a member to get some sick benefits.</h3>
+
     <form action="/membership" method="POST">
-      <label for="member_password">Enter the password...</label>
-      <input type="password" name="member_password" id="member_password" required/>
-      <button type="submit">Submit</button>
+      <div class="form-group">
+        <label for="member_password">Membership key</label>
+        <input type="password" name="member_password" id="member_password" required />
+      </div>
+      <button type="submit" class="form-submit">Unlock membership</button>
     </form>
-  </body>
+  </main>
+</body>
 </html>
