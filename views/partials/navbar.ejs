@@ -9,10 +9,11 @@
       <% if (locals.user.is_member && !locals.user.is_admin) { %>
         <a href="/admin">Become an admin</a>
       <% } %>
-      <a href="/logout">Logout</a>
+      <button onclick="document.getElementById('logout-modal').style.display='flex'">Logout</button>
     <% } else { %>
       <a href="/login">Login</a>
       <a href="/sign-up" class="nav-primary">Sign up</a>
     <% } %>
   </div>
 </nav>
+<%- include('./logout-modal.ejs') %>

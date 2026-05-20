@@ -1,0 +1,80 @@
+<div
+  id="logout-modal"
+  style="
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+  "
+>
+  <div
+    style="
+      background: var(--card-bg);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 320px;
+      width: 90%;
+      text-align: center;
+    "
+  >
+    <p
+      style="
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 20px;
+        margin-bottom: 0.5rem;
+      "
+    >
+      Log out?
+    </p>
+    <p
+      style="
+        font-size: 13px;
+        color: var(--text-tertiary);
+        margin-bottom: 1.5rem;
+      "
+    >
+      You can always come back.
+    </p>
+    <div style="display: flex; gap: 8px">
+      <button
+        onclick="document.getElementById('logout-modal').style.display = 'none'"
+        style="
+          flex: 1;
+          padding: 9px;
+          font-family: 'Karla', sans-serif;
+          font-size: 13px;
+          background: none;
+          border: 0.5px solid var(--border);
+          border-radius: 8px;
+          cursor: pointer;
+          color: var(--text-secondary);
+        "
+      >
+        Cancel
+      </button>
+      <a
+        href="/logout"
+        style="
+          flex: 1;
+          padding: 9px;
+          font-family: 'Karla', sans-serif;
+          font-size: 13px;
+          background: var(--green-500);
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          color: #f8f2e8;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+        >Logout</a
+      >
+    </div>
+  </div>
+</div>
