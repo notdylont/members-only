@@ -28,6 +28,10 @@ const addMembership = async (id) => {
   await pool.query(`UPDATE users SET is_member = true WHERE id = $1`, [id]);
 };
 
+const addAdmin = async (id) => {
+  await pool.query(`UPDATE users SET is_admin = true WHERE id = $1`, [id]);
+};
+
 const insertMessage = async (title, message, userId) => {
   await pool.query(
     `INSERT INTO messages (title, text, user_id) VALUES ($1, $2, $3)`,
@@ -41,6 +45,10 @@ const getAllMessages = async () => {
   );
   return rows;
 };
+
+const deleteMessage = async (id) => {
+  pool.query(`DELETE FROM messages WHERE id = $1`, [id]);
+};
 module.exports = {
   getAllUsers,
   findUser,
@@ -49,4 +57,6 @@ module.exports = {
   addMembership,
   insertMessage,
   getAllMessages,
+  addAdmin,
+  deleteMessage,
 };

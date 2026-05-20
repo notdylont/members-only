@@ -12,7 +12,7 @@ const logout = (req, res, next) => {
 
 const getIndex = async (req, res) => {
   const messages = await db.getAllMessages();
-  res.render('index', { user: req.user, messages: messages });
+  res.render('index', { messages: messages });
 };
 
 const getSignUpForm = (req, res) => {
@@ -24,11 +24,39 @@ const getLoginForm = (req, res) => {
 };
 
 const getMemberForm = (req, res) => {
-  res.render('member-form', { user: req.user });
+  res.render('member-form');
 };
 
 const getNewMsgForm = (req, res) => {
-  res.render('new-msg-form', { user: req.user });
+  res.render('new-msg-form');
+};
+
+const getAdminForm = (req, res) => {
+  if (req.user.is_admin) return res.redirect('/');
+  res.render('admin-form');
+};
+
+const postAdminForm = async (req, res, next) => {
+  try {
+    const { admin_key } = req.body;
+    if (admin_key === process.env.ADMIN_KEY) {
+      await db.addAdmin(req.user.id);
+      res.redirect('/');
+    } else {
+      res.status(401).render('admin-form', { error: 'Wrong key' });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const postDeleteMessage = async (req, res, next) => {
+  try {
+    await db.deleteMessage(req.params.id);
+    res.redirect('/');
+  } catch (err) {
+    next(err);
+  }
 };
 
 const postNewMsgForm = async (req, res, next) => {
@@ -48,9 +76,7 @@ const postMemberForm = async (req, res, next) => {
       await db.addMembership(req.user.id);
       res.redirect('/');
     } else {
-      res
-        .status(401)
-        .render('member-form', { error: 'Wrong password', user: req.user });
+      res.status(401).render('member-form', { error: 'Wrong password' });
     }
   } catch (err) {
     next(err);
@@ -91,8 +117,11 @@ module.exports = {
   getLoginForm,
   getMemberForm,
   getNewMsgForm,
+  getAdminForm,
   postMemberForm,
   postSignUpForm,
   postLoginForm,
   postNewMsgForm,
+  postAdminForm,
+  postDeleteMessage,
 };

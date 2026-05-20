@@ -5,9 +5,13 @@
         <% if (locals.user && !locals.user.is_member) {%>
             <a href="/membership">Become a member</a>
         <% } %>
+        <% if(locals.user && locals.user.is_member && !locals.user.is_admin) { %>
+            <a href="/admin">Become an admin</a>
+        <% } %>
         <a href="/logout">Logout</a>
     <% } else{ %>
         <a href="/login">Login</a>
         <a href="/sign-up">Sign up</a>
+
     <% } %>
 </nav>
