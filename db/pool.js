@@ -9,4 +9,7 @@ module.exports = new Pool({
   user: USER,
   password: PASSWORD,
   port: 5432,
+  ssl: {
+    require: true,
+  },
 });
